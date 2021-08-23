@@ -1,8 +1,8 @@
-import React from 'react';
-import { App } from 'framework7-react';
-import routes from './commons/routes';
-import F7Views from './components/Views';
-import { QueryClient, QueryClientProvider} from 'react-query'
+import React from "react";
+import { App } from "framework7-react";
+import routes from "./commons/routes";
+import F7Views from "./components/Views";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,9 +15,9 @@ const queryClient = new QueryClient({
 
 const f7params = {
   routes,
-  name: 'My App',
+  name: "My App",
   theme: "auto",
-  id: 'com.react.boiler',
+  id: "com.react.boiler",
 };
 
 const MyApp = (props) => {
@@ -27,7 +27,7 @@ const MyApp = (props) => {
         <F7Views />
       </App>
     </QueryClientProvider>
-  )  
-}
+  );
+};
 
 export default MyApp;
