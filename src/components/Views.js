@@ -1,6 +1,6 @@
 import React from "react";
 import { Views, View, Toolbar, Link, Icon } from "framework7-react";
-
+import "../App.css";
 const F7Views = () => {
   return (
     <>
@@ -9,11 +9,7 @@ const F7Views = () => {
           <Link className="text-xs w-30px" tabLink="#view-league">
             <div className="flex flex-col justify-center items-center ">
               <img
-                style={{
-                  filter:
-                    " invert(100%) sepia(0%) saturate(304%) hue-rotate(226deg) brightness(105%) contrast(72%)",
-                }}
-                className="brightness-20"
+                className="grayFilter"
                 src="/assets/icons/League.png"
                 alt="league"
               />{" "}
@@ -24,10 +20,7 @@ const F7Views = () => {
           <Link className="text-xs" tabLink="#view-home" tabLinkActive>
             <div className="flex flex-col justify-center items-center ">
               <img
-                style={{
-                  filter:
-                    " invert(100%) sepia(0%) saturate(304%) hue-rotate(226deg) brightness(105%) contrast(72%)",
-                }}
+                className="grayFilter"
                 src="/assets/icons/Home.png"
                 alt="home"
               />{" "}
@@ -37,20 +30,28 @@ const F7Views = () => {
           <Link className="text-xs" tabLink="#view-history">
             <div className="flex flex-col justify-center items-center ">
               <img
-                style={{
-                  filter:
-                    " invert(100%) sepia(0%) saturate(304%) hue-rotate(226deg) brightness(105%) contrast(72%)",
-                }}
+                className="grayFilter"
                 src="/assets/icons/History.png"
                 alt="history"
               />{" "}
               <div>히스토리</div>
             </div>
           </Link>
+          <Link className="text-xs w-30px" tabLink="#view-signIn">
+            <div className="flex flex-col justify-center items-center ">
+              <img
+                className="grayFilter"
+                src="/assets/icons/League.png"
+                alt="league"
+              />{" "}
+              <div>로그인</div>
+            </div>
+          </Link>
         </Toolbar>
         <View id="view-home" stackPages main tab tabActive url="/" />
         <View id="view-history" name="history" tab url="/history" />
         <View id="view-league" stackPages name="league" tab url="/league" />
+        <View id="view-signIn" stackPages name="signIn" tab url="/signIn" />
       </Views>
     </>
   );

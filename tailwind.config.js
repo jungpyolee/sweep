@@ -44,6 +44,7 @@ module.exports = {
         400: "#FABC57",
       },
     },
+
     extend: {},
   },
   variants: {

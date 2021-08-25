@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import moment from "moment";
 function MatchTab() {
   const monthWithYear = moment().format("YYYY년 MM월");
-  moment.lang("ko", {
+  moment.locale("ko", {
     weekdays: [
       "일요일",
       "월요일",
@@ -45,10 +45,10 @@ function MatchTab() {
     },
   ];
   const matchDate = moment(matchDummy[0].startTime)
-    .add("hours", -9)
+    .add(-9, "hours")
     .format("M월 D일 (ddd)");
   const matchTime = moment(matchDummy[0].startTime)
-    .add("hours", -9)
+    .add(-9, "hours")
     .format("HH:mm");
   useEffect(
     () => {

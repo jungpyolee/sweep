@@ -1,5 +1,6 @@
 import React from "react";
 import { App } from "framework7-react";
+
 import routes from "./commons/routes";
 import F7Views from "./components/Views";
 import { QueryClient, QueryClientProvider } from "react-query";
