@@ -1,11 +1,11 @@
-import HomePage from '../pages/home';
-import AboutPage from '../pages/about';
-import LoginPage from '../pages/login';
+import HomePage from "../pages/home";
+import LeaguePage from "../pages/league";
+import HistoryPage from "../pages/history";
 
 const routes = [
-  { path: '/', component: HomePage },
-  { path: '/about', component: AboutPage },
-  { path: '/login', component: LoginPage },
+  { path: "/", component: HomePage },
+  { path: "/league", component: LeaguePage },
+  { path: "/history", component: HistoryPage },
 ];
 
 export default routes;
