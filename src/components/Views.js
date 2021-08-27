@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Views, View, Toolbar, Link, Icon } from "framework7-react";
 import "../App.css";
+import { useRecoilState } from "recoil";
+import { isAuthAtom } from "../atoms/index";
+import { useEffect } from "react";
+
 const F7Views = () => {
-  return (
-    <>
+  const [isAuth, setIsAuth] = useRecoilState(isAuthAtom);
+  console.log("fsdafhsdiofhaidosfhidos", isAuth);
+  useEffect(() => {}, [isAuth]);
+
+  if (isAuth) {
+    return (
       <Views tabs className="safe-areas">
-        <Toolbar style={{ height: 70, backgroundColor: "white" }} tabbar bottom>
+        <Toolbar style={{ height: 70 }} tabbar bottom>
           <Link className="text-xs w-30px" tabLink="#view-league">
             <div className="flex flex-col justify-center items-center ">
               <img
@@ -37,24 +45,31 @@ const F7Views = () => {
               <div>히스토리</div>
             </div>
           </Link>
-          <Link className="text-xs w-30px" tabLink="#view-signIn">
-            <div className="flex flex-col justify-center items-center ">
-              <img
-                className="grayFilter"
-                src="/assets/icons/League.png"
-                alt="league"
-              />{" "}
-              <div>로그인</div>
-            </div>
-          </Link>
         </Toolbar>
         <View id="view-home" stackPages main tab tabActive url="/" />
-        <View id="view-history" name="history" tab url="/history" />
+        <View id="view-history" stackPages name="history" tab url="/history" />
         <View id="view-league" stackPages name="league" tab url="/league" />
-        <View id="view-signIn" stackPages name="signIn" tab url="/signIn" />
       </Views>
-    </>
-  );
+    );
+  } else {
+    return (
+      <Views className="safe-areas">
+        <View id="view-signIn" stackPages name="signIn" url="/signIn" />
+        <View
+          id="view-teamSelect"
+          stackPages
+          name="teamSelect"
+          url="/teamSelect"
+        />
+        <View
+          id="view-nicknameSelect"
+          stackPages
+          name="nicknameSelect"
+          url="/nicknameSelect"
+        />
+      </Views>
+    );
+  }
 };
 
 export default F7Views;

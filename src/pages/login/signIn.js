@@ -1,13 +1,44 @@
-import axios from "axios";
 import { Page } from "framework7-react";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import KakaoLogin from "react-kakao-login";
+import { useRecoilState } from "recoil";
+import { isAuthAtom } from "../../atoms/index";
 import styled from "styled-components";
-function SignInPage({ f7router }) {
-  const [userInfo, setUserInfo] = useState(null);
+import { useQuery } from "react-query";
+import { useState } from "react";
+import axios from "axios";
+
+function SignInPage({ f7route, f7router }) {
+  const [uid, setUid] = useState(null);
+  const [needSignUp, setNeedSignUp] = useState(false);
+  const [isAuth, setIsAuth] = useRecoilState(isAuthAtom);
+
+  const checkId = (uid) => {
+    axios
+      .post("http://3.37.194.249/auth/login", { id: uid })
+      .then((response) => {
+        console.log(response);
+        const status = response.data.status;
+        if (status === 200) {
+          setIsAuth(true);
+        } else if (status === 401) {
+          // setIsAuth(true);
+          f7router.navigate("/teamSelect");
+          setUid(null);
+        }
+      });
+  };
+  const { isIdle, isLoading } = useQuery(
+    ["checkId", { uid: uid }],
+    (uid) => {
+      checkId(uid);
+    },
+    { enabled: !!uid }
+  );
+
   const responseKaKao = (res) => {
-    setUserInfo({ data: res });
+    let uid = res.profile.id;
+    setUid(uid);
   };
 
   const KaKaoBtn = styled(KakaoLogin)`
@@ -27,40 +58,22 @@ function SignInPage({ f7router }) {
 
   const jskey = "905395547087143874fa6cebfaa309e7";
 
-  useEffect(() => {
-    if (userInfo) {
-      let uid = userInfo.data.profile.id;
-      let body = { id: uid };
-      axios.post("http://3.37.194.249/auth/login", body).then((response) => {
-        console.log(response.data);
-        if (response.data.status === 401) {
-          console.log("팀선택페이지로 이동");
-        } else {
-          console.log("홈 페이지로 이동시킴(로그인성공)");
-        }
-      });
-    }
-  }, [userInfo]);
-
-  return (
-    <div>
-      <Page noToolbar>
-        <div className="mt-28 text-xl">클린하게 즐기는 LCK</div>
-        <br />
-        <br />
-        <br />
-        <KaKaoBtn
-          onClick={() => {}}
-          token={jskey}
-          onSuccess={responseKaKao}
-          getProfile={true}
-        >
-          <img src="/assets/icons/kakao.svg" alt="dd" />
-        </KaKaoBtn>{" "}
-      </Page>
-      ;
-    </div>
-  );
+  if (isLoading || isIdle)
+    return (
+      <div>
+        <Page tabs noToolbar>
+          <div className="mt-28 text-xl">클린하게 즐기는 LCK</div>
+          <br />
+          <br />
+          <br />
+          <KaKaoBtn token={jskey} onSuccess={responseKaKao} getProfile={true}>
+            <img src="/assets/icons/kakao.svg" alt="dd" />
+          </KaKaoBtn>{" "}
+        </Page>
+        ;
+      </div>
+    );
+  return <Page></Page>;
 }
 
 export default SignInPage;

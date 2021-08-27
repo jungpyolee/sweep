@@ -8,6 +8,7 @@ module.exports = {
       lg: ["20px", "28px"],
       xl: ["24px", "32px"],
     },
+
     colors: {
       primary: {
         900: "#0C1B4A",
@@ -44,6 +45,10 @@ module.exports = {
         400: "#FABC57",
       },
     },
+
+    borderColor: (theme) => ({
+      ...theme("colors"),
+    }),
 
     extend: {},
   },

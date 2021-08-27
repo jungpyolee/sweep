@@ -21,7 +21,11 @@ const HistoryPage = ({ f7route, f7router }) => {
       </Toolbar>
       <Tabs>
         <Tab id="tab-recent" tabActive></Tab>
-        <Tab id="tab-hof" />
+
+        <Tab id="tab-hof">
+          {" "}
+          <Link>최근 메세지</Link>
+        </Tab>
       </Tabs>
     </Page>
   );
