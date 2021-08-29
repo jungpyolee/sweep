@@ -6,15 +6,10 @@ import { useState } from "react";
 function TeamSelectPage() {
   const [teamInfo, setTeamInfo] = useState([]);
   const [selected, setSelected] = useState();
-  const getTeamInfo = () => {
-    axios.get("http://3.37.194.249/info/teamInfo").then((response) => {
-      setTeamInfo(response.data.data);
-      console.log(response.data.data);
-    });
-  };
-  const { isLoading, data, isSuccess } = useQuery("getTeamInfo", () => {
-    getTeamInfo();
-  });
+  const getTeamInfo = () =>
+    axios.get("http://3.37.194.249/info/teamInfo").then((res) => res.data);
+
+  const { isLoading, data, isSuccess } = useQuery("getTeamInfo", getTeamInfo);
 
   if (isLoading) {
     return <Page>로딩중입니다</Page>;
@@ -28,9 +23,9 @@ function TeamSelectPage() {
         <p className="text-base text-center">
           팀 선택 시 한 달 동안 변경이 <br /> 불가능하니 신중히 선택해 주세요
         </p>{" "}
-        {teamInfo && (
+        {data && (
           <ul className="grid grid-cols-2 grid-flow-row gap-4  ">
-            {teamInfo.map((team) => {
+            {data.data.map((team) => {
               return (
                 <li
                   className="border rounded-2xl border-grayscale-200 flex flex-col justify-center items-center w-36 h-36 cursor-pointer"

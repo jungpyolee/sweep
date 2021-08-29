@@ -6,33 +6,18 @@ import { isAuthAtom } from "../../atoms/index";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { useState } from "react";
-import axios from "axios";
 
+import { signIn } from "../../api/authApi";
 function SignInPage({ f7route, f7router }) {
   const [uid, setUid] = useState(null);
   const [needSignUp, setNeedSignUp] = useState(false);
   const [isAuth, setIsAuth] = useRecoilState(isAuthAtom);
 
-  const checkId = (uid) => {
-    axios
-      .post("http://3.37.194.249/auth/login", { id: uid })
-      .then((response) => {
-        console.log(response);
-        const status = response.data.status;
-        if (status === 200) {
-          setIsAuth(true);
-        } else if (status === 401) {
-          // setIsAuth(true);
-          f7router.navigate("/teamSelect");
-          setUid(null);
-        }
-      });
-  };
-  const { isIdle, isLoading } = useQuery(
-    ["checkId", { uid: uid }],
-    (uid) => {
-      checkId(uid);
-    },
+  const { isIdle, isLoading, data } = useQuery(
+    ["signIn", { uid: uid }],
+
+    signIn,
+
     { enabled: !!uid }
   );
 
@@ -73,6 +58,19 @@ function SignInPage({ f7route, f7router }) {
         ;
       </div>
     );
+  if (data.status === 401) {
+    // 회원이 아닐경우
+    f7router.navigate("/teamSelect");
+    setUid("");
+  }
+  if (data.status === 400) {
+    alert("로그인 오류");
+    f7router.navigate("/signin");
+  }
+  if (data.status === 200) {
+    setIsAuth(true);
+    // f7router.navigate('/')
+  }
   return <Page></Page>;
 }
 
