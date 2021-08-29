@@ -4,6 +4,7 @@ import { App } from "framework7-react";
 import routes from "./commons/routes";
 import F7Views from "./components/Views";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +34,7 @@ const MyApp = (props) => {
         <App {...f7params}>
           <F7Views />
         </App>
+        <ReactQueryDevtools />
       </RecoilRoot>
     </QueryClientProvider>
   );
