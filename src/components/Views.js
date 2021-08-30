@@ -17,7 +17,7 @@ const F7Views = () => {
           <Link className="text-xs w-30px" tabLink="#view-league">
             <div className="flex flex-col justify-center items-center ">
               <img
-                className="grayFilter"
+                className="grayFilter200"
                 src="/assets/icons/League.png"
                 alt="league"
               />{" "}
@@ -28,7 +28,7 @@ const F7Views = () => {
           <Link className="text-xs" tabLink="#view-home" tabLinkActive>
             <div className="flex flex-col justify-center items-center ">
               <img
-                className="grayFilter"
+                className="grayFilter200"
                 src="/assets/icons/Home.png"
                 alt="home"
               />{" "}
@@ -38,7 +38,7 @@ const F7Views = () => {
           <Link className="text-xs" tabLink="#view-history">
             <div className="flex flex-col justify-center items-center ">
               <img
-                className="grayFilter"
+                className="grayFilter200"
                 src="/assets/icons/History.png"
                 alt="history"
               />{" "}
@@ -54,7 +54,12 @@ const F7Views = () => {
   } else {
     return (
       <Views className="safe-areas">
-        <View id="view-signIn" stackPages name="signIn" url="/signIn" />
+        <View
+          id="view-signIn"
+          stackPages
+          name="signIn"
+          url="/signIn?is_main=true"
+        />
         <View
           id="view-teamSelect"
           stackPages
