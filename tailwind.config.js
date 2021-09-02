@@ -31,7 +31,9 @@ module.exports = {
         300: "#C2C2C2",
         200: "#DBDBDB",
         100: "#F5F5F5",
+        0: "#ffffff",
       },
+
       danger: {
         500: "#D32F2F",
         400: "#DC5959",

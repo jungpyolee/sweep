@@ -1,4 +1,16 @@
-.grayFilter {
+.grayFilter200 {
   filter: invert(100%) sepia(0%) saturate(304%) hue-rotate(226deg)
     brightness(105%) contrast(72%);
+}
+
+.grayFilter300 {
+  filter: invert(98%) sepia(0%) saturate(95%) hue-rotate(175deg) brightness(81%)
+    contrast(89%);
+}
+
+.teamNotSelected:active {
+  filter: brightness(90%);
+}
+
+.teamSelected {
 }

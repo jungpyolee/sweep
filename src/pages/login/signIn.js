@@ -1,29 +1,42 @@
 import { Page } from "framework7-react";
-import React from "react";
+import React, { useEffect } from "react";
 import KakaoLogin from "react-kakao-login";
 import { useRecoilState } from "recoil";
-import { isAuthAtom } from "../../atoms/index";
+import { isAuthAtom, uidAtom } from "../../atoms/index";
 import styled from "styled-components";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useState } from "react";
 
 import { signIn } from "../../api/authApi";
-function SignInPage({ f7route, f7router }) {
-  const [uid, setUid] = useState(null);
-  const [needSignUp, setNeedSignUp] = useState(false);
+function SignInPage({ f7router }) {
+  const [uid, setUid] = useRecoilState(uidAtom);
   const [isAuth, setIsAuth] = useRecoilState(isAuthAtom);
 
-  const { isIdle, isLoading, data } = useQuery(
-    ["signIn", { uid: uid }],
+  const { isIdle, isLoading, data, mutate } = useMutation(signIn, {
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
 
-    signIn,
-
-    { enabled: !!uid }
-  );
+  useEffect(() => {
+    console.log("실행됨");
+    if (data?.data.status === 401) {
+      // 회원이 아닐경우
+      f7router.navigate("/teamSelect");
+    }
+    if (data?.data.status === 400) {
+      alert("로그인 오류");
+    }
+    if (data?.data.status === 200) {
+      setIsAuth(true);
+    }
+  }, [data]);
 
   const responseKaKao = (res) => {
     let uid = res.profile.id;
     setUid(uid);
+    console.log(uid);
+    mutate({ id: uid });
   };
 
   const KaKaoBtn = styled(KakaoLogin)`
@@ -58,19 +71,7 @@ function SignInPage({ f7route, f7router }) {
         ;
       </div>
     );
-  if (data.status === 401) {
-    // 회원이 아닐경우
-    f7router.navigate("/teamSelect");
-    setUid("");
-  }
-  if (data.status === 400) {
-    alert("로그인 오류");
-    f7router.navigate("/signin");
-  }
-  if (data.status === 200) {
-    setIsAuth(true);
-    // f7router.navigate('/')
-  }
+
   return <Page></Page>;
 }
 
