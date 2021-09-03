@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import moment from "moment";
+import moment from 'moment'
 function MatchTab() {
   const monthWithYear = moment().format("YYYY년 MM월");
   moment.locale("ko", {

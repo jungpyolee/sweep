@@ -1,11 +1,12 @@
 import axios from "axios";
 
-const api = axios.create({ baseURL: "http://localhost:5000/auth" });
-// "http://3.37.194.249/auth" });
+const api = axios.create({ baseURL:  "http://3.37.194.249/auth" });
 
 export const signIn = (body) =>
   api.post("/login", body).then((res) => {
-    // localStorage.setItem("accesstoken", res.headers.accesstoken);
+    localStorage.setItem("accesstoken", res.headers.accesstoken);
+    localStorage.setItem("refreshtoken", res.headers.refreshtoken);
+    
     console.log(res);
     return res;
   });

@@ -9,6 +9,8 @@ import {
   Tabs,
   Tab,
 } from "framework7-react";
+import Hof from "./tabs/historyTabs/hof";
+import Recent from "./tabs/historyTabs/recent";
 
 const HistoryPage = ({ f7route, f7router }) => {
   return (
@@ -20,11 +22,12 @@ const HistoryPage = ({ f7route, f7router }) => {
         <Link tabLink="#tab-hof">명예의 전당</Link>
       </Toolbar>
       <Tabs>
-        <Tab id="tab-recent" tabActive></Tab>
+        <Tab id="tab-recent" tabActive>
+          <Recent />
+        </Tab>
 
         <Tab id="tab-hof">
-          {" "}
-          <Link>최근 메세지</Link>
+          <Hof />
         </Tab>
       </Tabs>
     </Page>
