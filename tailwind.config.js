@@ -3,10 +3,22 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontSize: {
+      xs: ["12px", "18px"],
       sm: ["14px", "20px"],
       base: ["16px", "24px"],
       lg: ["20px", "28px"],
       xl: ["24px", "32px"],
+    },
+    width: {
+      72: "288px",
+      80: "320px",
+      4: "16px",
+    },
+    height: {
+      card: "200px",
+      24: "96px",
+      14: "56px",
+      4: "16px",
     },
 
     colors: {
