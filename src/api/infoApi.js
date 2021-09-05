@@ -1,8 +1,9 @@
 import axios from "axios";
-
+import { setToken, getDatawithTokenCheck } from "./token";
 const api = axios.create({ baseURL: "http://3.37.194.249/info" });
 
-export const getMonthSchedule = (month) => api.get(`/schedule?month=${month}`);
+export const getMonthSchedule = (month) =>
+  api.get(`/schedule?month=${month}`).then((res) => res.data);
 export const getTeamRank = () => api.get("/teamRank");
 export const getPOGRank = () => api.get("/pogRank");
 export const getTeamInfo = () => api.get("/teamInfo").then((res) => res.data);

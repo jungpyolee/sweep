@@ -7,16 +7,19 @@ import styled from "styled-components";
 import { useMutation, useQuery } from "react-query";
 import { useState } from "react";
 
-import { signIn } from "../../api/authApi";
+import { read, signIn } from "../../api/authApi";
 function SignInPage({ f7router }) {
   const [uid, setUid] = useRecoilState(uidAtom);
   const [isAuth, setIsAuth] = useRecoilState(isAuthAtom);
 
-  const { isIdle, isLoading, data, mutate } = useMutation(signIn, {
-    onSuccess: (data) => {
-      console.log(data);
+  const { isFetched } = useQuery("read", read, {
+    onSuccess: (data1) => {
+      if (data1.status === 200) {
+        setIsAuth(true);
+      }
     },
   });
+  const { data, isIdle, isLoading, mutate } = useMutation(signIn);
 
   useEffect(() => {
     console.log("실행됨");

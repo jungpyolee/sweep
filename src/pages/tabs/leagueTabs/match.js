@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
-import moment from 'moment'
+import moment from "moment";
+import { useQuery } from "react-query";
+import { getMonthSchedule } from "../../../api/infoApi";
 function MatchTab() {
-  const monthWithYear = moment().format("YYYY년 MM월");
+  const [monthControl, setMonthControl] = useState(0);
+  let monthWithYear = moment()
+    .add(monthControl, "months")
+    .format("YYYY년 MM월");
+
+  const thisMonth = moment().format("M");
+  const [month, setMonth] = useState(thisMonth);
+
   moment.locale("ko", {
     weekdays: [
       "일요일",
@@ -16,6 +25,28 @@ function MatchTab() {
     weekdaysShort: ["일", "월", "화", "수", "목", "금", "토"],
   });
 
+  const groupByArray = (xs, key) => {
+    return xs.reduce(function (rv, x) {
+      let v = key instanceof Function ? key(x) : x[key];
+      let el = rv.find((r) => r && r.key === v);
+      if (el) {
+        el.values.push(x);
+      } else {
+        rv.push({ key: v, values: [x] });
+      }
+      return rv;
+    }, []);
+  };
+
+  const { data } = useQuery(["getMonth", { month: month }], () =>
+    getMonthSchedule(month)
+  );
+
+  console.log(moment("2021-08-01T20:00:00.000Z").add(-9, "hours").format("D"));
+
+  console.log(groupByArray(data.data, moment(data.data.startTime).format("D")));
+  console.log(monthWithYear);
+  console.log(data);
   const matchDummy = [
     {
       id: 73,
@@ -50,32 +81,42 @@ function MatchTab() {
   const matchTime = moment(matchDummy[0].startTime)
     .add(-9, "hours")
     .format("HH:mm");
-  useEffect(
-    () => {
-      // 대충 월이 바뀌면 getMatch 다시한다는 내용
-    },
-    [
-      //대충 month state
-    ]
-  );
+
   return (
     <React.Fragment>
       <div>
         <div>
           {/* month nav */}
           <div className="mt-5 flex justify-center text-base">
-            <img src="/assets/icons/24px/Arrow/Left.png" alt="left_arrow" />
-            {monthWithYear}
-            <img src="/assets/icons/24px/Arrow/Right.png" alt="right_arrow" />
+            {month > 1 ? (
+              <img
+                onClick={() => {
+                  setMonth(month - 1);
+                  setMonthControl(monthControl - 1);
+                }}
+                src="/assets/icons/24px/Arrow/Left.png"
+                alt="left_arrow"
+              />
+            ) : null}
+            <div>2021년{month}월</div>
+            {month < 12 ? (
+              <img
+                onClick={() => {
+                  setMonth(month + 1);
+                  setMonthControl(monthControl + 1);
+                }}
+                src="/assets/icons/24px/Arrow/Right.png"
+                alt="right_arrow"
+              />
+            ) : null}
           </div>{" "}
         </div>
 
         {/* matchList */}
 
         <div>
-          <div>
+          <div className="pl-base pt-md text-sm h-11 bg-grayscale-0">
             {matchDate}
-            {matchTime}
           </div>
           <div></div>
         </div>

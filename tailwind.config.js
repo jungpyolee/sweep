@@ -17,8 +17,19 @@ module.exports = {
     height: {
       card: "200px",
       24: "96px",
+
+      16: "64px",
+      11: "44px",
       14: "56px",
       4: "16px",
+    },
+
+    padding: {
+      sm: "8px",
+      md: "14px",
+      base: "20px",
+      lg: "24px",
+      xl: "48px",
     },
 
     colors: {
@@ -58,6 +69,9 @@ module.exports = {
         500: "#F9A825",
         400: "#FABC57",
       },
+    },
+    zIndex: {
+      9999: 9999,
     },
 
     borderColor: (theme) => ({

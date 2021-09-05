@@ -13,39 +13,47 @@ const F7Views = () => {
   return (
     <>
       {isAuth ? (
-        <Views tabs className="safe-areas">
-          <Toolbar style={{ height: 70 }} tabbar bottom>
-            <Link className="text-xs w-30px" tabLink="#view-league">
-              <div className="flex flex-col justify-center items-center ">
-                <img
-                  className="grayFilter200"
-                  src="/assets/icons/League.png"
-                  alt="league"
-                />{" "}
-                <div>리그</div>
-              </div>
-            </Link>
-            <Link className="text-xs" tabLink="#view-home" tabLinkActive>
-              <div className="flex flex-col justify-center items-center ">
-                <img
-                  className="grayFilter200"
-                  src="/assets/icons/Home.png"
-                  alt="home"
-                />{" "}
-                <div>홈</div>
-              </div>
-            </Link>
-            <Link className="text-xs" tabLink="#view-history">
-              <div className="flex flex-col justify-center items-center ">
-                <img
-                  className="grayFilter200"
-                  src="/assets/icons/History.png"
-                  alt="history"
-                />{" "}
-                <div>히스토리</div>
-              </div>
-            </Link>
-          </Toolbar>
+        <Views tabs className=" safe-areas">
+          <div
+            style={{ width: "100%" }}
+            className=" h-16 z-9999 absolute bottom-0 bg-grayscale-0"
+          >
+            {/* 왜 여기서 w-full안먹음?? */}
+            <div className="flex justify-center ">
+              <Link className="text-xs w-30px" tabLink="#view-league">
+                <div className="flex flex-col justify-center items-center ">
+                  <img
+                    className="grayFilter200"
+                    src="/assets/icons/League.png"
+                    alt="league"
+                  />{" "}
+                  <div>리그</div>
+                </div>
+              </Link>
+              <Link className="text-xs" tabLink="#view-history">
+                <div className="flex flex-col justify-center items-center ">
+                  <img
+                    className="grayFilter200"
+                    src="/assets/icons/History.png"
+                    alt="history"
+                  />{" "}
+                  <div>히스토리</div>
+                </div>
+              </Link>
+              <Link className="text-xs" tabLink="#view-home" tabLinkActive>
+                <div className="flex flex-col justify-center items-center ">
+                  <img
+                    className="grayFilter200"
+                    src="/assets/icons/Home.png"
+                    alt="home"
+                  />{" "}
+                  <div>홈</div>
+                </div>
+              </Link>
+            </div>
+            <div> </div>
+          </div>
+
           <View id="view-home" stackPages main tab tabActive url="/" />
           <View
             id="view-history"
