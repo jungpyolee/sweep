@@ -72,18 +72,6 @@ const F7Views = () => {
             name="signIn"
             url="/signIn?is_main=true"
           />
-          {/* <View
-            id="view-teamSelect"
-            stackPages
-            name="teamSelect"
-            url="/teamSelect"
-          />{" "}
-          <View
-            id="view-nicknameSelect"
-            stackPages
-            name="nicknameSelect"
-            url="/nicknameSelect"
-          /> */}
         </Views>
       )}
     </>

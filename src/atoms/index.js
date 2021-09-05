@@ -19,3 +19,8 @@ export const isAuthAtom = atom({
   key: "isAuthAtom",
   default: false,
 });
+
+export const currentUserAtom = atom({
+  key: "currentUserAtom",
+  default: null,
+});

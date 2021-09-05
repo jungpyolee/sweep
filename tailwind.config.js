@@ -12,21 +12,29 @@ module.exports = {
     width: {
       72: "288px",
       80: "320px",
+      18: "74px",
+      6: "24px",
       4: "16px",
     },
     height: {
       card: "200px",
-      24: "96px",
 
+      24: "96px",
+      20: "80px",
       16: "64px",
+      13: "52px",
+      12: "48px",
       11: "44px",
       14: "56px",
+      8: "32px",
+      6: "24px",
       4: "16px",
     },
 
     padding: {
       sm: "8px",
       md: "14px",
+      mdd: "16px",
       base: "20px",
       lg: "24px",
       xl: "48px",

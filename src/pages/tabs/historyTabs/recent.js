@@ -7,9 +7,9 @@ export default function Recent() {
 
   console.log(data);
   return (
-    <div>
+    <div className="pb-xl">
       {data &&
-        data.data.map((tinder) => {
+        data.data?.map((tinder) => {
           let createdAt = moment(tinder.createdAt).format("M월 D일");
           console.log(createdAt);
           return (

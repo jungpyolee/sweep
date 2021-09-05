@@ -3,8 +3,11 @@ import { useEffect } from "react";
 import moment from "moment";
 import { useQuery } from "react-query";
 import { getMonthSchedule } from "../../../api/infoApi";
+import _ from "lodash";
+import { groupByArray, mappedData } from "../../../utils/timeUtil";
 function MatchTab() {
   const [monthControl, setMonthControl] = useState(0);
+  const [noSchedule, setNoSchedule] = useState(true);
   let monthWithYear = moment()
     .add(monthControl, "months")
     .format("YYYY년 MM월");
@@ -25,71 +28,43 @@ function MatchTab() {
     weekdaysShort: ["일", "월", "화", "수", "목", "금", "토"],
   });
 
-  const groupByArray = (xs, key) => {
-    return xs.reduce(function (rv, x) {
-      let v = key instanceof Function ? key(x) : x[key];
-      let el = rv.find((r) => r && r.key === v);
-      if (el) {
-        el.values.push(x);
-      } else {
-        rv.push({ key: v, values: [x] });
-      }
-      return rv;
-    }, []);
-  };
-
-  const { data } = useQuery(["getMonth", { month: month }], () =>
-    getMonthSchedule(month)
+  const { data } = useQuery(
+    ["getMonth", { month: month }],
+    () => getMonthSchedule(month),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        if (data?.data.length === 0) {
+          setNoSchedule(true);
+        } else {
+          setNoSchedule(false);
+          mappedData(data?.data);
+        }
+      },
+    }
   );
 
-  console.log(moment("2021-08-01T20:00:00.000Z").add(-9, "hours").format("D"));
+  const groupedSchedule = groupByArray(data?.data, "startTime");
+  console.log(groupedSchedule);
 
-  console.log(groupByArray(data.data, moment(data.data.startTime).format("D")));
-  console.log(monthWithYear);
-  console.log(data);
-  const matchDummy = [
-    {
-      id: 73,
-      aTeamName: "NS",
-      bTeamName: "HLE",
-      aTeamIcon:
-        "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
-      bTeamIcon:
-        "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png",
-      aTeamScore: 2,
-      bTeamScore: 1,
-      status: 1,
-      startTime: "2021-08-01T17:00:00.000Z",
-    },
-    {
-      id: 74,
-      aTeamName: "DK",
-      bTeamName: "KT",
-      aTeamIcon:
-        "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
-      bTeamIcon:
-        "https://cdn.pandascore.co/images/team/image/63/kt_rolsterlogo_profile.png",
-      aTeamScore: 2,
-      bTeamScore: 0,
-      status: 1,
-      startTime: "2021-08-01T20:00:00.000Z",
-    },
-  ];
-  const matchDate = moment(matchDummy[0].startTime)
-    .add(-9, "hours")
-    .format("M월 D일 (ddd)");
-  const matchTime = moment(matchDummy[0].startTime)
-    .add(-9, "hours")
-    .format("HH:mm");
-
+  const status = {
+    "-1": "예정",
+    0: "진행",
+    1: "진행",
+    2: "종료",
+  };
   return (
     <React.Fragment>
       <div>
         <div>
           {/* month nav */}
-          <div className="mt-5 flex justify-center text-base">
+          <div
+            style={{ width: "100%" }}
+            className="bg-grayscale-0 h-13 fixed  items-center flex justify-center text-base"
+          >
             {month > 1 ? (
               <img
+                className="w-6 h-6"
                 onClick={() => {
                   setMonth(month - 1);
                   setMonthControl(monthControl - 1);
@@ -98,9 +73,10 @@ function MatchTab() {
                 alt="left_arrow"
               />
             ) : null}
-            <div>2021년{month}월</div>
+            <div>2021년 {month}월</div>
             {month < 12 ? (
               <img
+                className="w-6 h-6"
                 onClick={() => {
                   setMonth(month + 1);
                   setMonthControl(monthControl + 1);
@@ -109,16 +85,153 @@ function MatchTab() {
                 alt="right_arrow"
               />
             ) : null}
-          </div>{" "}
+          </div>
         </div>
 
         {/* matchList */}
 
-        <div>
-          <div className="pl-base pt-md text-sm h-11 bg-grayscale-0">
-            {matchDate}
-          </div>
-          <div></div>
+        <div style={{ paddingTop: 52, paddingBottom: 52 }} className="">
+          {data?.data.length ? (
+            groupedSchedule.map((dailyMatch, key) => {
+              let match1 = dailyMatch.values[0];
+              let match2 = dailyMatch.values[1];
+              return (
+                <div key={key}>
+                  <div className="pl-base pt-md text-sm h-11 bg-primary-100">
+                    {dailyMatch.key}
+                  </div>
+
+                  {/* 시간 */}
+                  <div className="bg-grayscale-0 flex justify-between items-center h-20 py-mdd px-base">
+                    <div>
+                      <div className="text-sm">{match1.startHour}</div>
+                      <div className="text-xs text-center text-grayscale-300 bg-grayscale-100 rounded-lg mt-2">
+                        {status[match1.status]}
+                      </div>
+                    </div>
+
+                    {/* 게임정보 */}
+                    <div className="w-18 h-12">
+                      <div className="flex justify-between">
+                        {/* a팀 */}
+                        <img
+                          className="w-6 h-6"
+                          src={match1.aTeamIcon}
+                          alt="aTeam"
+                        />{" "}
+                        <div>{match1.aTeamName}</div>
+                        <div
+                          className={
+                            match1.aTeamScore === 2
+                              ? "text-primary-500"
+                              : "text-grayscale-300"
+                          }
+                        >
+                          {match1.aTeamScore}
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between">
+                        {/* b팀 */}
+                        <img
+                          className="w-6 h-6"
+                          src={match1.bTeamIcon}
+                          alt="bTeam"
+                        />
+                        <div>{match1.bTeamName}</div>
+                        <div
+                          className={
+                            match1.bTeamScore === 2
+                              ? "text-primary-500"
+                              : "text-grayscale-300"
+                          }
+                        >
+                          {match1.bTeamScore}
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      {match1.status === 2 ? (
+                        <div className="w-18 h-8 flex items-center justify-center text-grayscale-400 rounded-lg border border-grayscale-200">
+                          {" "}
+                          MOG 10
+                        </div>
+                      ) : (
+                        <div className="w-18 h-8 flex items-center justify-center text-primary-500 rounded-lg border border-primary-300">
+                          응원하기
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* 2경기 */}
+                  <div className="bg-grayscale-0 flex justify-between items-center h-20 py-mdd px-base">
+                    <div>
+                      <div className="text-sm">{match2.startHour}</div>
+                      <div className="text-xs text-center text-grayscale-300 bg-grayscale-100 rounded-lg mt-2">
+                        {status[match2.status]}
+                      </div>
+                    </div>
+
+                    {/* 게임정보 */}
+                    <div className="w-18 h-12">
+                      <div className="flex justify-between">
+                        {/* a팀 */}
+                        <img
+                          className="w-6 h-6"
+                          src={match2.aTeamIcon}
+                          alt="aTeam"
+                        />{" "}
+                        <div>{match2.aTeamName}</div>
+                        <div
+                          className={
+                            match2.aTeamScore === 2
+                              ? "text-primary-500"
+                              : "text-grayscale-300"
+                          }
+                        >
+                          {match2.aTeamScore}
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between">
+                        {/* b팀 */}
+                        <img
+                          className="w-6 h-6"
+                          src={match2.bTeamIcon}
+                          alt="bTeam"
+                        />
+                        <div>{match2.bTeamName}</div>
+                        <div
+                          className={
+                            match2.bTeamScore === 2
+                              ? "text-primary-500"
+                              : "text-grayscale-300"
+                          }
+                        >
+                          {match2.bTeamScore}
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      {match2.status === 2 ? (
+                        <div className="w-18 h-8 flex items-center justify-center text-grayscale-400 rounded-lg border border-grayscale-200">
+                          {" "}
+                          MOG 10
+                        </div>
+                      ) : (
+                        <div className="w-18 h-8 flex items-center justify-center text-primary-500 rounded-lg border border-primary-300">
+                          응원하기
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div>일정이 없습니다.</div>
+          )}
         </div>
       </div>
     </React.Fragment>

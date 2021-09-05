@@ -57,7 +57,9 @@ function TeamSelectPage({ f7route, f7router }) {
         </ul>
       )}
       <p
-        onClick={() => {}}
+        onClick={() => {
+          setSelected(true);
+        }}
         className="p-2 cursor-pointer text-center text-grayscale-400"
       >
         나중에 선택할래요
