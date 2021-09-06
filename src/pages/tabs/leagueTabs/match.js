@@ -92,7 +92,7 @@ function MatchTab() {
               let match2 = dailyMatch.values[1];
               return (
                 <div key={key}>
-                  <div className="pl-base pt-md text-sm h-11 bg-primary-100">
+                  <div className="pl-base pt-md text-sm border-b border-grayscale-300 h-11 bg-primary-100">
                     {dailyMatch.key}
                   </div>
 

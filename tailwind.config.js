@@ -15,20 +15,42 @@ module.exports = {
       18: "74px",
       6: "24px",
       4: "16px",
+      1: "100%",
+      0.5: "50%",
     },
     height: {
       card: "200px",
 
       24: "96px",
       20: "80px",
+      19: "76px",
       16: "64px",
       13: "52px",
       12: "48px",
       11: "44px",
       14: "56px",
+      15: "60px",
+      9: "36px",
       8: "32px",
       6: "24px",
       4: "16px",
+    },
+
+    margin: {
+      20: "80px",
+      19.5: "78px",
+      19: "76px",
+      18.5: "74px",
+      18: "72px",
+      8: "32px",
+      9: "36px",
+
+      4: "16px",
+      sm: "8px",
+      md: "14px",
+      base: "20px",
+      lg: "24px",
+      xl: "48px",
     },
 
     padding: {
@@ -38,6 +60,11 @@ module.exports = {
       base: "20px",
       lg: "24px",
       xl: "48px",
+      13: "52px",
+      16: "64px",
+      19: "76px",
+      2: "8px",
+      1: "4px",
     },
 
     colors: {
@@ -80,6 +107,7 @@ module.exports = {
     },
     zIndex: {
       9999: 9999,
+      50: 50,
     },
 
     borderColor: (theme) => ({
