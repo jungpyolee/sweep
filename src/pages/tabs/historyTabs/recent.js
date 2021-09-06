@@ -8,7 +8,7 @@ export default function Recent() {
   console.log(data);
   return (
     <div className="pb-xl">
-      {data &&
+      {data ? (
         data.data?.map((tinder) => {
           let createdAt = moment(tinder.createdAt).format("M월 D일");
           console.log(createdAt);
@@ -50,7 +50,10 @@ export default function Recent() {
               </div>
             </div>
           );
-        })}
+        })
+      ) : (
+        <div>하루동안 작성한 메시지가 없습니다.</div>
+      )}
     </div>
   );
 }
