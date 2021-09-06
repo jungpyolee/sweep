@@ -34,12 +34,7 @@ function MatchTab() {
     {
       onSuccess: (data) => {
         console.log(data);
-        if (data?.data.length === 0) {
-          setNoSchedule(true);
-        } else {
-          setNoSchedule(false);
-          mappedData(data?.data);
-        }
+        if (data?.data.length) mappedData(data?.data);
       },
     }
   );
@@ -230,7 +225,7 @@ function MatchTab() {
               );
             })
           ) : (
-            <div>일정이 없습니다.</div>
+            <div className="pt-xl text-center">이 달은 경기가 없어요 :(</div>
           )}
         </div>
       </div>
