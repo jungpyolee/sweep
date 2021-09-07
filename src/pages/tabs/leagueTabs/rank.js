@@ -59,20 +59,20 @@ function RankTab() {
         </Tab>
 
         <Tab className="mt-19 pb-16" id="tab-mvp">
-          <div className="fixed flex w-1 h-11 bg-primary-100 border-b border-grayscale-200">
-            <div className="w-0.4 pl-2 flex ">
-              <p className="pl-1">순위</p>
-              <div className="flex ml-10">
-                &nbsp;&nbsp;<p>팀</p> &nbsp;&nbsp;&nbsp;&nbsp;
-                <p>포지션</p>
-              </div>
+          <div className="fixed flex items-center w-1 h-11 bg-primary-100 border-b border-grayscale-200">
+            <div className="w-0.5 pl-2 flex items-center">
+              <div className="w-8 ml-xs">순위</div>
+              <div className="w-4 ml-lg">팀</div>{" "}
+              <div className="w-12 ml-base">포지션</div>
             </div>
-            <div className="w-0.6 flex justify-end pr-base">
-              <p className="pr-22">플레이어 </p>
-              <p>포인트</p>
+
+            <div className="w-0.5 items-center flex   ">
+              <div className="w-0.6 text-left mr-9">플레이어</div>
+              <div className="w-0.4 mr-sm text-center">포인트</div>
             </div>
           </div>
           {/* 순위파트 */}
+
           <MVPRank />
         </Tab>
       </Tabs>

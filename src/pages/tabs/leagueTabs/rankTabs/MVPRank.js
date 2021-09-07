@@ -15,9 +15,9 @@ export default function MVPRank() {
               className=" flex h-15 mx-base border-b border-grayscale-100"
             >
               <div className="w-0.5 flex items-center">
-                <div className="w-4 mr-11">{player.rank}</div>
+                <div className="w-4 mr-7">{player.rank}</div>
                 <img
-                  className="w-6 h-6 mr-4"
+                  className="w-6 h-6 mr-base"
                   src={player.team.icon}
                   alt="icon"
                 />
