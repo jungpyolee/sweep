@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { getTeamRank } from "../../../../api/infoApi";
 
 export default function TeamRank() {
-  const { data } = useQuery("rank", getTeamRank);
+  const { data } = useQuery("teamRank", getTeamRank);
   console.log(data?.data);
   return (
     <div className="bg-grayscale-0">
