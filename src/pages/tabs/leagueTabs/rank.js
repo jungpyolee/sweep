@@ -2,6 +2,7 @@ import { Link, Page, Tab, Tabs, Toolbar } from "framework7-react";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getTeamRank } from "../../../api/infoApi";
+import MVPRank from "./rankTabs/MVPRank";
 import TeamRank from "./rankTabs/TeamRank";
 
 function RankTab() {
@@ -55,10 +56,25 @@ function RankTab() {
           </div>
           {/* 순위파트 */}
           <TeamRank />
-          <div></div>
         </Tab>
 
-        <Tab id="tab-mvp">mvp탭</Tab>
+        <Tab className="mt-19 pb-16" id="tab-mvp">
+          <div className="fixed flex w-1 h-11 bg-primary-100 border-b border-grayscale-200">
+            <div className="w-0.4 pl-2 flex ">
+              <p className="pl-1">순위</p>
+              <div className="flex ml-10">
+                &nbsp;&nbsp;<p>팀</p> &nbsp;&nbsp;&nbsp;&nbsp;
+                <p>포지션</p>
+              </div>
+            </div>
+            <div className="w-0.6 flex justify-end pr-base">
+              <p className="pr-22">플레이어 </p>
+              <p>포인트</p>
+            </div>
+          </div>
+          {/* 순위파트 */}
+          <MVPRank />
+        </Tab>
       </Tabs>
     </Page>
   );
