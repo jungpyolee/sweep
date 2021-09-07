@@ -4,13 +4,9 @@ export const mappedData = (data) => {
   let array = [];
   array.push(
     data?.map((match) => {
-      match.startHour = moment(match.startTime)
-        .add(-9, "hours")
-        .format("HH: mm");
+      match.startHour = moment(match.startTime).format("HH: mm");
 
-      match.startTime = moment(match.startTime)
-        .add(-9, "hours")
-        .format("M월 D일 (ddd)");
+      match.startTime = moment(match.startTime).format("M월 D일 (ddd)");
 
       return match;
     })
