@@ -4,7 +4,7 @@ import { getTeamRank } from "../../../../api/infoApi";
 
 export default function TeamRank() {
   const { data } = useQuery("teamRank", getTeamRank);
-  console.log(data?.data);
+
   return (
     <div className="bg-grayscale-0">
       {data &&

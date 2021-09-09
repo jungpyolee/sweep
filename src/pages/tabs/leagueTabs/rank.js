@@ -1,7 +1,5 @@
 import { Link, Page, Tab, Tabs, Toolbar } from "framework7-react";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
-import { getTeamRank } from "../../../api/infoApi";
 import MVPRank from "./rankTabs/MVPRank";
 import TeamRank from "./rankTabs/TeamRank";
 

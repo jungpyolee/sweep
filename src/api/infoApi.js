@@ -9,4 +9,4 @@ export const getPOGRank = () => api.get("/pogRank").then((res) => res.data);
 export const getTeamInfo = () => api.get("/teamInfo").then((res) => res.data);
 export const getCurrentGame = () => api.get("/currentGame");
 export const getGameResultById = (gameId) =>
-  api.get(`/gamaResult?gameId=${gameId}`);
+  api.get(`/gameResult?gameId=${gameId}`).then((res) => res.data);

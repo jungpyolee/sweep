@@ -29,3 +29,7 @@ export const groupByArray = (xs, key) => {
     return rv;
   }, []);
 };
+
+export const gameResultDate = (time) => {
+  return moment(time).format("YYYY.MM.DD");
+};

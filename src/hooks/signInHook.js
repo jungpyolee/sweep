@@ -13,7 +13,7 @@ export default function useSignInHooks() {
   const responseKaKao = (res) => {
     let uid = res.profile.id;
     setUid(uid);
-    console.log(uid);
+
     mutate({ id: uid });
   };
 

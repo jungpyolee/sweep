@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import moment from "moment";
 import { useQuery } from "react-query";
 import { getMonthSchedule } from "../../../api/infoApi";
-import _ from "lodash";
 import { groupByArray, mappedData } from "../../../utils/timeUtil";
-function MatchTab() {
+import { Link } from "framework7-react";
+function MatchTab({ f7router }) {
   const [monthControl, setMonthControl] = useState(0);
   const [noSchedule, setNoSchedule] = useState(true);
-  let monthWithYear = moment()
-    .add(monthControl, "months")
-    .format("YYYY년 MM월");
 
-  const thisMonth = moment().format("M");
+  const thisMonth = parseInt(moment().format("M"));
   const [month, setMonth] = useState(thisMonth);
 
   moment.locale("ko", {
@@ -33,14 +29,12 @@ function MatchTab() {
     () => getMonthSchedule(month),
     {
       onSuccess: (data) => {
-        console.log(data);
         if (data?.data.length) mappedData(data?.data);
       },
     }
   );
 
   const groupedSchedule = groupByArray(data?.data, "startTime");
-  console.log(groupedSchedule);
 
   const status = {
     "-1": "예정",
@@ -97,6 +91,7 @@ function MatchTab() {
                   </div>
 
                   {/* 시간 */}
+
                   <div className="bg-grayscale-0 flex justify-between items-center h-20 py-mdd px-base">
                     <div>
                       <div className="text-sm">{match1.startHour}</div>
@@ -104,7 +99,6 @@ function MatchTab() {
                         {status[match1.status]}
                       </div>
                     </div>
-
                     {/* 게임정보 */}
                     <div className="w-18 h-12">
                       <div className="flex justify-between">
@@ -125,7 +119,6 @@ function MatchTab() {
                           {match1.aTeamScore}
                         </div>
                       </div>
-
                       <div className="flex justify-between">
                         {/* b팀 */}
                         <img
@@ -147,14 +140,24 @@ function MatchTab() {
                     </div>
                     <div>
                       {match1.status === 2 ? (
-                        <div className="w-18 h-8 flex items-center justify-center text-grayscale-400 rounded-lg border border-grayscale-200">
+                        <Link
+                          onClick={() => {
+                            f7router.navigate(`/game/${match1.id}`);
+                          }}
+                          className="w-18 h-8 flex items-center justify-center text-grayscale-400 rounded-lg border border-grayscale-200"
+                        >
                           {" "}
                           MOG 10
-                        </div>
+                        </Link>
                       ) : (
-                        <div className="w-18 h-8 flex items-center justify-center text-primary-500 rounded-lg border border-primary-300">
+                        <Link
+                          onClick={() => {
+                            f7router.navigate(`/game/${match1.id}`);
+                          }}
+                          className="w-18 h-8 flex items-center justify-center text-primary-500 rounded-lg border border-primary-300"
+                        >
                           응원하기
-                        </div>
+                        </Link>
                       )}
                     </div>
                   </div>
@@ -210,14 +213,24 @@ function MatchTab() {
                     </div>
                     <div>
                       {match2.status === 2 ? (
-                        <div className="w-18 h-8 flex items-center justify-center text-grayscale-400 rounded-lg border border-grayscale-200">
+                        <Link
+                          onClick={() => {
+                            f7router.navigate(`/game/${match2.id}`);
+                          }}
+                          className="w-18 h-8 flex items-center justify-center text-grayscale-400 rounded-lg border border-grayscale-200"
+                        >
                           {" "}
                           MOG 10
-                        </div>
+                        </Link>
                       ) : (
-                        <div className="w-18 h-8 flex items-center justify-center text-primary-500 rounded-lg border border-primary-300">
+                        <Link
+                          onClick={() => {
+                            f7router.navigate(`/game/${match2.id}`);
+                          }}
+                          className="w-18 h-8 flex items-center justify-center text-primary-500 rounded-lg border border-primary-300"
+                        >
                           응원하기
-                        </div>
+                        </Link>
                       )}
                     </div>
                   </div>

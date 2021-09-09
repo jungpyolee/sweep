@@ -8,7 +8,6 @@ export const signIn = (body) =>
     localStorage.setItem("accesstoken", res.headers.accesstoken);
     localStorage.setItem("refreshtoken", res.headers.refreshtoken);
 
-    console.log(res);
     return res;
   });
 

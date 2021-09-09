@@ -4,7 +4,7 @@ import { getPOGRank } from "../../../../api/infoApi";
 
 export default function MVPRank() {
   const { data } = useQuery("POGRank", getPOGRank);
-  console.log(data?.data);
+
   return (
     <div className="pt-11 bg-grayscale-0">
       {data &&

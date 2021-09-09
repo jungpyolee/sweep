@@ -22,4 +22,10 @@ export const getHOF = () =>
 export const getTinder = (count, filter) =>
   api.get(`/tinder?count=${count}&filter=${filter}`);
 
-export const getTopTinder = (gameId) => api.get(`/toptinder?gameId=${gameId}`);
+export const getTopTinder = (gameId) =>
+  api
+    .get(`/toptinder?gameId=${gameId}`, {
+      headers: setToken,
+      withCredentials: true,
+    })
+    .then(getDatawithTokenCheck);

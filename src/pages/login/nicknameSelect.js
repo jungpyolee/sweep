@@ -47,7 +47,6 @@ function NicknameSelectPage({ f7router }) {
             nickname: values.nickname,
             teamId: teamId,
           });
-          console.log(uid, values.nickname, teamId);
         }}
       >
         {({

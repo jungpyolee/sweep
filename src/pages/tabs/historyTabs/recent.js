@@ -5,15 +5,17 @@ import moment from "moment";
 export default function Recent() {
   const { data } = useQuery("getHistory", getHistory);
 
-  console.log(data);
   return (
     <div className="pb-xl">
       {data ? (
-        data.data?.map((tinder) => {
+        data.data?.map((tinder, key) => {
           let createdAt = moment(tinder.createdAt).format("M월 D일");
-          console.log(createdAt);
+
           return (
-            <div className="ml-5 flex flex-col justify-between 	rounded-2xl w-80 h-card bg-grayscale-0 mb-4 mt-6">
+            <div
+              key={key}
+              className="ml-5 flex flex-col justify-between 	rounded-2xl w-80 h-card bg-grayscale-0 mb-4 mt-6"
+            >
               <div className="pt-4 pr-4 text-xs flex justify-end">
                 {createdAt}
               </div>

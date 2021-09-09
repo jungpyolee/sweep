@@ -15,7 +15,7 @@ const LeaguePage = ({ f7route, f7router }) => {
       <Tabs>
         <Tab id="tab-match" tabActive>
           {" "}
-          <MatchTab />
+          <MatchTab f7router={f7router} />
         </Tab>
 
         <Tab id="tab-rank">
