@@ -19,7 +19,7 @@ const F7Views = () => {
             className=" h-16 z-9999 absolute bottom-0 bg-grayscale-0"
           >
             {/* 왜 여기서 w-full안먹음?? */}
-            <div className="flex justify-center ">
+            <div className="flex justify-around pt-sm ">
               <Link className="text-xs w-30px" tabLink="#view-league">
                 <div className="flex flex-col justify-center items-center ">
                   <img
@@ -30,16 +30,6 @@ const F7Views = () => {
                   <div>리그</div>
                 </div>
               </Link>
-              <Link className="text-xs" tabLink="#view-history">
-                <div className="flex flex-col justify-center items-center ">
-                  <img
-                    className="grayFilter200"
-                    src="/assets/icons/History.png"
-                    alt="history"
-                  />{" "}
-                  <div>히스토리</div>
-                </div>
-              </Link>
               <Link className="text-xs" tabLink="#view-home" tabLinkActive>
                 <div className="flex flex-col justify-center items-center ">
                   <img
@@ -48,6 +38,16 @@ const F7Views = () => {
                     alt="home"
                   />{" "}
                   <div>홈</div>
+                </div>
+              </Link>
+              <Link className="text-xs" tabLink="#view-history">
+                <div className="flex flex-col justify-center items-center ">
+                  <img
+                    className="grayFilter200"
+                    src="/assets/icons/History.png"
+                    alt="history"
+                  />{" "}
+                  <div>히스토리</div>
                 </div>
               </Link>
             </div>

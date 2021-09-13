@@ -14,7 +14,7 @@ export default function Recent() {
           return (
             <div
               key={key}
-              className="ml-5 flex flex-col justify-between 	rounded-2xl w-80 h-card bg-grayscale-0 mb-4 mt-6"
+              className="ml-base mt-base flex flex-col justify-between 	rounded-2xl w-80 h-card bg-grayscale-0 mb-4 mt-6"
             >
               <div className="pt-4 pr-4 text-xs flex justify-end">
                 {createdAt}
