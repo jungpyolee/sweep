@@ -17,6 +17,7 @@ module.exports = {
       80: "320px",
       30: "120px",
       18: "74px",
+      16: "64px",
       8: "32px",
       12: "48px",
       10: "40px",
@@ -85,11 +86,13 @@ module.exports = {
 
     padding: {
       sm: "8px",
+
       md: "14px",
       mdd: "16px",
       base: "20px",
       lg: "24px",
       xl: "48px",
+      24: "96px",
       22: "88px",
       9: "36px",
       11: "44px",
@@ -97,6 +100,7 @@ module.exports = {
       16: "64px",
       19: "76px",
       3: "12px",
+      2.5: "10px",
       2: "8px",
       1: "4px",
     },

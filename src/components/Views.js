@@ -7,7 +7,9 @@ import { useEffect } from "react";
 
 const F7Views = () => {
   const [isAuth, setIsAuth] = useRecoilState(isAuthAtom);
-
+  const [onHistory, setOnHistory] = useState(false);
+  const [onHome, setOnHome] = useState(true);
+  const [onLeague, setOnLeague] = useState(false);
   useEffect(() => {}, [isAuth]);
 
   return (
@@ -19,31 +21,56 @@ const F7Views = () => {
             className=" h-16 z-9999 absolute bottom-0 bg-grayscale-0"
           >
             {/* 왜 여기서 w-full안먹음?? */}
-            <div className="flex justify-around pt-sm ">
-              <Link className="text-xs w-30px" tabLink="#view-league">
+            <div className=" flex justify-around pt-sm ">
+              <Link
+                className="text-xs text-grayscale-600 w-30px"
+                tabLink="#view-league"
+                onClick={() => {
+                  setOnHome(false);
+                  setOnLeague(true);
+                  setOnHistory(false);
+                }}
+              >
                 <div className="flex flex-col justify-center items-center ">
                   <img
-                    className="grayFilter200"
+                    className={onLeague ? "primary500" : "grayFilter200"}
                     src="/assets/icons/League.png"
                     alt="league"
                   />{" "}
                   <div>리그</div>
                 </div>
               </Link>
-              <Link className="text-xs" tabLink="#view-home" tabLinkActive>
+              <Link
+                className="text-xs text-grayscale-600"
+                tabLink="#view-home"
+                tabLinkActive
+                onClick={() => {
+                  setOnHome(true);
+                  setOnLeague(false);
+                  setOnHistory(false);
+                }}
+              >
                 <div className="flex flex-col justify-center items-center ">
                   <img
-                    className="grayFilter200"
+                    className={onHome ? "primary500" : "grayFilter200"}
                     src="/assets/icons/Home.png"
                     alt="home"
                   />{" "}
                   <div>홈</div>
                 </div>
               </Link>
-              <Link className="text-xs" tabLink="#view-history">
+              <Link
+                className="text-xs text-grayscale-600"
+                tabLink="#view-history"
+                onClick={() => {
+                  setOnHome(false);
+                  setOnLeague(false);
+                  setOnHistory(true);
+                }}
+              >
                 <div className="flex flex-col justify-center items-center ">
                   <img
-                    className="grayFilter200"
+                    className={onHistory ? "primary500" : "grayFilter200"}
                     src="/assets/icons/History.png"
                     alt="history"
                   />{" "}

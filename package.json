@@ -16,6 +16,7 @@
     "react-lottie": "^1.2.3",
     "react-query": "^3.21.0",
     "react-scripts": "4.0.3",
+    "react-tinder-card": "^1.4.0",
     "recoil": "^0.4.0",
     "styled-components": "^5.3.1",
     "yup": "^0.32.9"

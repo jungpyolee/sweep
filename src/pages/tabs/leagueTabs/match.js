@@ -163,77 +163,79 @@ function MatchTab({ f7router }) {
                   </div>
 
                   {/* 2경기 */}
-                  <div className="bg-grayscale-0 flex justify-between items-center h-20 py-mdd px-base">
-                    <div>
-                      <div className="text-sm">{match2.startHour}</div>
-                      <div className="text-xs text-center text-grayscale-300 bg-grayscale-100 rounded-lg mt-2">
-                        {status[match2.status]}
-                      </div>
-                    </div>
-
-                    {/* 게임정보 */}
-                    <div className="w-18 h-12">
-                      <div className="flex justify-between">
-                        {/* a팀 */}
-                        <img
-                          className="w-6 h-6"
-                          src={match2.aTeamIcon}
-                          alt="aTeam"
-                        />{" "}
-                        <div>{match2.aTeamName}</div>
-                        <div
-                          className={
-                            match2.aTeamScore === 2
-                              ? "text-primary-500"
-                              : "text-grayscale-300"
-                          }
-                        >
-                          {match2.aTeamScore}
+                  {match2 && (
+                    <div className="bg-grayscale-0 flex justify-between items-center h-20 py-mdd px-base">
+                      <div>
+                        <div className="text-sm">{match2.startHour}</div>
+                        <div className="text-xs text-center text-grayscale-300 bg-grayscale-100 rounded-lg mt-2">
+                          {status[match2.status]}
                         </div>
                       </div>
 
-                      <div className="flex justify-between">
-                        {/* b팀 */}
-                        <img
-                          className="w-6 h-6"
-                          src={match2.bTeamIcon}
-                          alt="bTeam"
-                        />
-                        <div>{match2.bTeamName}</div>
-                        <div
-                          className={
-                            match2.bTeamScore === 2
-                              ? "text-primary-500"
-                              : "text-grayscale-300"
-                          }
-                        >
-                          {match2.bTeamScore}
+                      {/* 게임정보 */}
+                      <div className="w-18 h-12">
+                        <div className="flex justify-between">
+                          {/* a팀 */}
+                          <img
+                            className="w-6 h-6"
+                            src={match2.aTeamIcon}
+                            alt="aTeam"
+                          />{" "}
+                          <div>{match2.aTeamName}</div>
+                          <div
+                            className={
+                              match2.aTeamScore === 2
+                                ? "text-primary-500"
+                                : "text-grayscale-300"
+                            }
+                          >
+                            {match2.aTeamScore}
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between">
+                          {/* b팀 */}
+                          <img
+                            className="w-6 h-6"
+                            src={match2.bTeamIcon}
+                            alt="bTeam"
+                          />
+                          <div>{match2.bTeamName}</div>
+                          <div
+                            className={
+                              match2.bTeamScore === 2
+                                ? "text-primary-500"
+                                : "text-grayscale-300"
+                            }
+                          >
+                            {match2.bTeamScore}
+                          </div>
                         </div>
                       </div>
+                      <div>
+                        {match2.status === 2 ? (
+                          <Link
+                            onClick={() => {
+                              f7router.navigate(`/game/${match2.id}`);
+                            }}
+                            className="w-18 h-8 flex items-center justify-center text-grayscale-400 rounded-lg border border-grayscale-200"
+                          >
+                            {" "}
+                            MOG 10
+                          </Link>
+                        ) : (
+                          <Link
+                            onClick={() => {
+                              f7router.navigate(`/game/${match2.id}`);
+                            }}
+                            className="w-18 h-8 flex items-center justify-center text-primary-500 rounded-lg border border-primary-300"
+                          >
+                            응원하기
+                          </Link>
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      {match2.status === 2 ? (
-                        <Link
-                          onClick={() => {
-                            f7router.navigate(`/game/${match2.id}`);
-                          }}
-                          className="w-18 h-8 flex items-center justify-center text-grayscale-400 rounded-lg border border-grayscale-200"
-                        >
-                          {" "}
-                          MOG 10
-                        </Link>
-                      ) : (
-                        <Link
-                          onClick={() => {
-                            f7router.navigate(`/game/${match2.id}`);
-                          }}
-                          className="w-18 h-8 flex items-center justify-center text-primary-500 rounded-lg border border-primary-300"
-                        >
-                          응원하기
-                        </Link>
-                      )}
-                    </div>
-                  </div>
+                  )}
                 </div>
               );
             })

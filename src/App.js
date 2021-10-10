@@ -34,7 +34,6 @@ const MyApp = (props) => {
         <App {...f7params}>
           <F7Views />
         </App>
-        <ReactQueryDevtools />
       </RecoilRoot>
     </QueryClientProvider>
   );

@@ -6,7 +6,7 @@ export default function Recent() {
   const { data } = useQuery("getHistory", getHistory);
 
   return (
-    <div className="pb-xl">
+    <div className="pb-xl px-base">
       {data ? (
         data.data?.map((tinder, key) => {
           let createdAt = moment(tinder.createdAt).format("M월 D일");
@@ -14,20 +14,20 @@ export default function Recent() {
           return (
             <div
               key={key}
-              className="ml-base mt-base flex flex-col justify-between 	rounded-2xl w-80 h-card bg-grayscale-0 mb-4 mt-6"
+              className="px-base mt-base flex flex-col justify-between 	rounded-2xl w-1 h-card bg-grayscale-0 mb-4 mt-6"
             >
-              <div className="pt-4 pr-4 text-xs flex justify-end">
+              <div className="pt-mdd pr-mdd  text-xs flex justify-end">
                 {createdAt}
               </div>
 
-              <div className="mx-auto text-base flex justify-center items-center w-72 h-24">
+              <div className="mx-auto text-base flex justify-center items-center w-1 h-24">
                 {tinder.message}
               </div>
 
-              <div className="w-80 h-14 flex border-t  border-grayscale-100 justify-around items-center">
+              <div className="w-1 h-14 flex border-t  border-grayscale-100 justify-around items-center">
                 <div className="flex justify-center items-center">
                   <img
-                    className="w-4 h-4 mr-2"
+                    className="w-4 h-4 mr-sm"
                     src="/assets/icons/Emoji/Best.png"
                     alt="superlike"
                   />
@@ -35,7 +35,7 @@ export default function Recent() {
                 </div>
                 <div className="flex justify-center items-center">
                   <img
-                    className="w-4 h-4 mr-2"
+                    className="w-4 h-4 mr-sm"
                     src="/assets/icons/Emoji/Like.png"
                     alt="like"
                   />
@@ -43,7 +43,7 @@ export default function Recent() {
                 </div>
                 <div className="flex justify-center items-center">
                   <img
-                    className="w-4 h-4 mr-2"
+                    className="w-4 h-4 mr-sm"
                     src="/assets/icons/Emoji/Dislike.png"
                     alt="dislike"
                   />

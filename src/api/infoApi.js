@@ -7,6 +7,8 @@ export const getMonthSchedule = (month) =>
 export const getTeamRank = () => api.get("/teamRank").then((res) => res.data);
 export const getPOGRank = () => api.get("/pogRank").then((res) => res.data);
 export const getTeamInfo = () => api.get("/teamInfo").then((res) => res.data);
-export const getCurrentGame = () => api.get("/currentGame");
+export const getCurrentGame = () =>
+  api.get("/currentGame").then((res) => res.data);
+
 export const getGameResultById = (gameId) =>
   api.get(`/gameResult?gameId=${gameId}`).then((res) => res.data);

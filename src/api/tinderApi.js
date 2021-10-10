@@ -20,7 +20,12 @@ export const getHOF = () =>
     .then(getDatawithTokenCheck);
 
 export const getTinder = (count, filter) =>
-  api.get(`/tinder?count=${count}&filter=${filter}`);
+  api
+    .get(`/?count=${count}&filter=${filter}`, {
+      headers: setToken,
+      withCredentials: true,
+    })
+    .then(getDatawithTokenCheck);
 
 export const getTopTinder = (gameId) =>
   api
